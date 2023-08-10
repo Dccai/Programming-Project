@@ -1,4 +1,25 @@
 .App {
   text-align: center;
 }
+#navBar{
+  height:30px;
+  background-color: rgb(30, 30, 30);
+}
 
+.link{
+  text-decoration: none;
+  font-style: italic;
+  font-size: 16px;
+  color: #c43f3f;
+
+  transition: all 0.3s ease-in-out;
+
+
+}
+.linkBlock{
+  max-width:100px;
+  height: 100%;
+}
+.linkBlock:hover{
+background-color: red;
+}
