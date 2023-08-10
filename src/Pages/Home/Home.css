@@ -67,7 +67,7 @@
 	letter-spacing: -2px;
 	font-weight: bold;
 }
-*{
+* :not(head,style,script){
     display:block;
     margin-left: auto;
     margin-right:auto;
