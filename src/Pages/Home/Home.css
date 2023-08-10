@@ -37,8 +37,11 @@
   --inputTransitionDuration: var(--transitionDuration);
   --inputTransitionTF: var(--transitionTF);
 }
-
+#homePage *:not(#spacer){
+  margin-top: 70px;
+}
 #homePage{
+    
     width:100%;
     height:100dvh;
     background-color:blue;
@@ -95,9 +98,7 @@
 .homeButtons:hover {
   background-color: #fff;
 }
-* :not(#homePage,#navBar,.App,#spacer){
-margin-top: 70px;
-}
+
 .homeButtons:active {
   box-shadow: #422800 2px 2px 0 0;
   transform: translate(2px, 2px);
