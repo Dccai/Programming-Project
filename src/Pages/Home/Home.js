@@ -19,7 +19,6 @@ export function Home(){
         <button className="homeButtons"onClick={()=>{GoToCreateQuestionaire(true)}}>Create Questionaire</button>
         <h3 className='sub'>Go To Questionare</h3>
         <form onSubmit={handleSubmit}>
-        
         <input name="password"id="password" type="text" placeholder="Enter Questionaire Password"/>
         <label htmlFor='password' id="passwordLabel">Enter Questionaire Password</label>
         <button className="homeButtons"type="submit">Submit</button>
