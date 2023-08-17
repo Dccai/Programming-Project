@@ -19,6 +19,9 @@
 .linkBlock{
   max-width:100px;
   height: 100%;
+  display: inline-block;
+  margin-left: 70px;
+  margin-right: 70px;
 }
 .linkBlock:hover{
 background-color: red;
