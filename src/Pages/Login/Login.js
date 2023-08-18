@@ -1,15 +1,19 @@
 import React,{useState} from "react";
 import { firestore,auth } from "../../Firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { Navigate } from "react-router-dom";
 export function Login(){
     let [error,tryAgain]=useState(false);
+    let [questionaire,goToQuestionaire]=useState(false);
     function onLogin(e){
         e.preventDefault();
         let form=new FormData(e.currentTarget);
         let data=Object.fromEntries(form);
-        signInWithEmailAndPassword(auth,data.loginemail,data.loginpassword).catch(e=>tryAgain(true))
+        signInWithEmailAndPassword(auth,data.loginemail,data.loginpassword).then(a=>goToQuestionaire(true)).catch(e=>tryAgain(true))
     }
-  
+    if(questionaire){
+        return <Navigate to="/Home" replace={true}/>
+    }
     if(!error){
     return (
         <div id="loginPage">

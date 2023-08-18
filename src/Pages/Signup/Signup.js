@@ -2,14 +2,19 @@ import React,{useState} from "react";
 import { firestore,auth } from "../../Firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import {addDoc,collection} from "@firebase/firestore";
+import { Navigate } from "react-router-dom";
 export function Signup(){
     let reference=collection(firestore,"UserData");
     let [error,tryAgain]=useState(false);
+    let [questionaire,goToQuestionaire]=useState(false);
     function signup(e){
         e.preventDefault();
         let form=new FormData(e.currentTarget);
         let data=Object.fromEntries(form);
-        createUserWithEmailAndPassword(auth, data.signUpEmail,data.signUpPassword).then((user)=>{addDoc(reference,{id:user.user.uid,rubric:[]});}).catch(error=>{console.log(error);tryAgain(true);});
+        createUserWithEmailAndPassword(auth, data.signUpEmail,data.signUpPassword).then((user)=>{addDoc(reference,{id:user.user.uid,rubric:[]});}).then(a=>{goToQuestionaire(true);}).catch(error=>{console.log(error);tryAgain(true);});
+    }
+    if(questionaire){
+        return <Navigate to="/Home" replace={true}/>
     }
     if (!error){
         return (
