@@ -3,6 +3,7 @@ import { firestore,auth } from "../../Firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { Navigate } from "react-router-dom";
 export function Login(){
+    let [back,goBack]=useState(false);
     let [error,tryAgain]=useState(false);
     let [questionaire,goToQuestionaire]=useState(false);
     function onLogin(e){
@@ -11,8 +12,11 @@ export function Login(){
         let data=Object.fromEntries(form);
         signInWithEmailAndPassword(auth,data.loginemail,data.loginpassword).then(a=>goToQuestionaire(true)).catch(e=>tryAgain(true))
     }
-    if(questionaire){
-        return <Navigate to="/Home" replace={true}/>
+    if(back){
+        return <Navigate to='/' replace={true}/>;
+    }
+    else if(questionaire){
+        return <Navigate to="/Home" replace={true}/>;
     }
     if(!error){
     return (
@@ -24,6 +28,7 @@ export function Login(){
             <input name="loginpassword" id="loginpassword"className="Loginform" type="text" required/>
             <button type="submit">Login</button>
             </form>
+            <button onClick={()=>{goBack(true)}}>Go Back</button>
         </div>
     );
     }

@@ -13,6 +13,7 @@ import { Checkin } from './Pages/Checkin/Checkin';
 export const Context=createContext();
 function App() {
   let [user,setUser]=useState(undefined);
+  let [docId,setDocId]=useState(undefined);
   useEffect(
     ()=>{
       let authListener=onAuthStateChanged(auth,(user)=>{
@@ -23,7 +24,7 @@ function App() {
       return ()=>authListener;
     }
     ,[]);
-    let contextData={userId:user};
+    let contextData={userId:user,docId:docId,setDocId:setDocId};
   function Navbar(){
     return (
       <nav id="navBar">
@@ -36,20 +37,17 @@ function App() {
       </nav>
     );
   }
-  if(!user){
-    return <Checkin/>;
-  }
   return (
     <div className="App">
       <BrowserRouter>
-      <Navbar/>
+      {user&&<Navbar/>}
       <Routes>
         <Route path="/" element={<Checkin/>}/>
         <Route path="/Home" element={<Home/>}/>
         <Route path="/RubricQuestionaire" element={<RubricQuestionaire/>}/>
         <Route path="/CreateQuestionaire" element={<Context.Provider value={contextData}><CreateQuestionaire/></Context.Provider>}/>
         <Route path="/Login" element={<Login/>}/>
-        <Route path="/Signup" element={<Signup/>}/>
+        <Route path="/Signup" element={<Context.Provider value={contextData}><Signup/></Context.Provider>}/>
       </Routes>
       </BrowserRouter>
     </div>

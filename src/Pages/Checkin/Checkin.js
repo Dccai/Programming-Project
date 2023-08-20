@@ -1,5 +1,6 @@
 import React,{useState} from "react";
 import { Navigate } from "react-router-dom";
+import "./Checkin.css";
 export function Checkin(){
     let [signUp,goSignUp]=useState(false);
     let [login,goLogin]=useState(false);
@@ -14,9 +15,10 @@ export function Checkin(){
     return (
         <div id="Checkin">
             <h1>Sign In!</h1>
-            <button onClick={()=>goSignUp(true)}>Sign Up</button>
+            <button id="signUp"onClick={()=>goSignUp(true)}>Sign Up</button>
             <h1>Login!</h1>
-            <button onClick={()=>goLogin(true)}>Login</button>
+            <button id="login" onClick={()=>goLogin(true)}>Login</button>
+            
         </div>
     );
 }

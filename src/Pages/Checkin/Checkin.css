@@ -1,0 +1,28 @@
+#signUp{
+    background-color: red;
+    border:10px solid rgb(99, 30, 30);
+   transition: transform 0.3s ease-in;
+    border-radius: 5px;
+}
+#signUp:hover{
+    transform: translateY(-5px);
+
+}
+h1{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    text-align: center;
+}
+@keyframes slideInLeft{
+    from{
+        transform:translateX(-200px);
+    }
+    to{
+        transform: translateY(300px);
+    }
+}
+#login{
+    animation:slideInLeft 2s ease-in 0s 2 normal none;
+
+}
