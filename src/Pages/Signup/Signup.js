@@ -14,7 +14,7 @@ export function Signup(){
         e.preventDefault();
         let form=new FormData(e.currentTarget);
         let data=Object.fromEntries(form);
-    createUserWithEmailAndPassword(auth, data.signUpEmail,data.signUpPassword).then((user)=>{addDoc(reference,{id:user.user.uid,rubric:[]}).then(dc=>{contextData.setDocId(dc.id);updateDoc(doc(reference,dc.id),{docId:dc.id})});})
+    createUserWithEmailAndPassword(auth, data.signUpEmail,data.signUpPassword).then((user)=>{addDoc(reference,{id:user.user.uid,rubric:[]}).then(dc=>{updateDoc(doc(reference,dc.id),{docId:dc.id})});})
         .then(a=>{goToQuestionaire(true);}).catch(error=>{console.log(error);tryAgain(true);});
     }
     if(back){

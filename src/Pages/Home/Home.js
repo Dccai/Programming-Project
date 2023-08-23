@@ -1,14 +1,26 @@
+import { collection,getDocs } from 'firebase/firestore';
 import './Home.css'
 import React,{useState} from 'react';
 import { Navigate } from 'react-router-dom';
+import { firestore } from '../../Firebase';
 export function Home(){
     let [CreateQuestionaire,GoToCreateQuestionaire]=useState(false);
     if(CreateQuestionaire){
         return <Navigate to="/CreateQuestionaire" replace={true}/>;
     }
-    function handleSubmit(e){
+    async function handleSubmit(e){
+        e.preventDefault();
         let form= new FormData(e.currentTarget);
         let data =Object.fromEntries(form);
+        let documents=await getDocs(collection(firestore,'userData'));
+        documents.docs.forEach(doc=>{
+            let docData=doc.data();
+            for (let dataProperties of docData.rubric){
+                if(dataProperties.password===data.password){
+                    console.log(dataProperties);
+                }
+            }
+        });
         //Enter Firebase Stuff Here
     }
     return (
@@ -21,7 +33,7 @@ export function Home(){
         <form onSubmit={handleSubmit}>
         <input name="password"id="password" type="text" placeholder="Enter Questionaire Password"/>
         <label htmlFor='password' id="passwordLabel">Enter Questionaire Password</label>
-        <button className="homeButtons"type="submit">Submit</button>
+        <button className="homeButtons"type="submit">Go To Questionaire</button>
         </form>
         </div>
     );
