@@ -2,6 +2,7 @@ import React,{useState,useContext, useEffect} from 'react';
 import { Context } from '../../App';
 import { getDoc, collection,data,doc } from 'firebase/firestore';
 import { firestore } from '../../Firebase';
+import './YourRubrics.css';
 export function YourRubrics(){
     let contextData=useContext(Context);
     let ref=collection(firestore,'userData');
@@ -17,10 +18,13 @@ export function YourRubrics(){
         getRubrics();
     },[]);
     return (
-        <div>
+        <div id='rubricDisplay'>
             {rubrics!==false?rubrics.map((a,h)=>{
             return (
-            <h1>Rubric To Add</h1>
+            <div className='rubricShower' key={h}>
+                <h3>{a.name}</h3>
+                <span>{a.password}</span>
+            </div>
             );
             }):<h1>Add Your Rubrics</h1>}
         </div>

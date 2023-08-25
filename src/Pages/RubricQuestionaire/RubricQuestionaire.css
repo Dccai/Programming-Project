@@ -1,0 +1,9 @@
+#displayOptions{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+}
+.option{
+    width: 200px;
+    height: 200px;
+    background-color: aqua;
+}

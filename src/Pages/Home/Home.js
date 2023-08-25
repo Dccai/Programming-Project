@@ -1,12 +1,20 @@
 import { collection,getDocs } from 'firebase/firestore';
 import './Home.css'
-import React,{useState} from 'react';
+import React,{useState,useRef,useContext} from 'react';
 import { Navigate } from 'react-router-dom';
 import { firestore } from '../../Firebase';
+import { Context } from '../../App';
+
 export function Home(){
+    let contextData=useContext(Context);
     let [CreateQuestionaire,GoToCreateQuestionaire]=useState(false);
+    let [questionaire,setQuestionaire]=useState(false);
     if(CreateQuestionaire){
         return <Navigate to="/CreateQuestionaire" replace={true}/>;
+    }
+    if(questionaire!==false){
+        contextData.rubricToUse.current=questionaire;
+        return <Navigate to="/RubricQuestionaire" replace={true} />;
     }
     async function handleSubmit(e){
         e.preventDefault();
@@ -17,7 +25,7 @@ export function Home(){
             let docData=doc.data();
             for (let dataProperties of docData.rubric){
                 if(dataProperties.password===data.password){
-                    console.log(dataProperties);
+                    setQuestionaire(dataProperties);
                 }
             }
         });

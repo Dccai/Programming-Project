@@ -5,7 +5,7 @@ import { Home } from './Pages/Home/Home';
 import { onAuthStateChanged } from 'firebase/auth';
 import { RubricQuestionaire } from './Pages/RubricQuestionaire/RubricQuestionaire';
 import { CreateQuestionaire } from './Pages/CreateQuestionaire/CreateQuestionaire';
-import React,{useEffect,useState,createContext} from 'react';
+import React,{useEffect,useState,createContext,useRef} from 'react';
 import { firestore,auth } from './Firebase';
 import {getDocs,query,where,collection,data} from 'firebase/firestore';
 import { Login } from './Pages/Login/Login';
@@ -17,6 +17,7 @@ function App() {
   let ref=collection(firestore,'userData');
   let [user,setUser]=useState(undefined);
   let [docId,setDocId]=useState(undefined);
+  let rubricToUse=useRef(undefined);
   useEffect(
     ()=>{
       let authListener=onAuthStateChanged(auth,(user)=>{
@@ -37,7 +38,7 @@ function App() {
       return ()=>authListener;
     }
     ,[]);
-    let contextData={userId:user,docId:docId,setDocId:setDocId};
+    let contextData={userId:user,docId:docId,setDocId:setDocId,rubricToUse:rubricToUse};
   function Navbar(){
     return (
       <nav id="navBar">
@@ -59,8 +60,8 @@ function App() {
       {user&&<Navbar/>}
       <Routes>
         <Route path="/" element={<Checkin/>}/>
-        <Route path="/Home" element={<Home/>}/>
-        <Route path="/RubricQuestionaire" element={<RubricQuestionaire/>}/>
+        <Route path="/Home" element={<Context.Provider value={contextData}><Home/></Context.Provider>}/>
+        <Route path="/RubricQuestionaire" element={<Context.Provider value={contextData}><RubricQuestionaire/></Context.Provider>}/>
         <Route path="/CreateQuestionaire" element={<Context.Provider value={contextData}><CreateQuestionaire/></Context.Provider>}/>
         <Route path="/Login" element={<Login/>}/>
         <Route path="/Signup" element={<Context.Provider value={contextData}><Signup/></Context.Provider>}/>
