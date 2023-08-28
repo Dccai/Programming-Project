@@ -12,12 +12,15 @@ import { Login } from './Pages/Login/Login';
 import { Signup } from './Pages/Signup/Signup';
 import { Checkin } from './Pages/Checkin/Checkin';
 import { YourRubrics } from './Pages/YourRubrics/YourRubrics';
+import { EditRubric } from './Pages/EditRubric/EditRubric';
 export const Context=createContext();
 function App() {
   let ref=collection(firestore,'userData');
   let [user,setUser]=useState(undefined);
   let [docId,setDocId]=useState(undefined);
   let rubricToUse=useRef(undefined);
+  let rubricToEdit=useRef(undefined);
+  let rubricToEditKey=useRef(undefined);
   useEffect(
     ()=>{
       let authListener=onAuthStateChanged(auth,(user)=>{
@@ -26,9 +29,7 @@ function App() {
         async function getData(){
           let q=query(ref,where('id','==',user.uid));
           let docs=await getDocs(q);
-      
           let doc=docs.docs[0]
-          
           let data=doc.data();
           setDocId(data.docId);
         }
@@ -38,7 +39,7 @@ function App() {
       return ()=>authListener;
     }
     ,[]);
-    let contextData={userId:user,docId:docId,setDocId:setDocId,rubricToUse:rubricToUse};
+    let contextData={userId:user,docId:docId,setDocId:setDocId,rubricToUse:rubricToUse,rubricToEdit:rubricToEdit,rubricToEditKey:rubricToEditKey};
   function Navbar(){
     return (
       <nav id="navBar">
@@ -66,6 +67,7 @@ function App() {
         <Route path="/Login" element={<Login/>}/>
         <Route path="/Signup" element={<Context.Provider value={contextData}><Signup/></Context.Provider>}/>
         <Route path="/YourRubrics" element={<Context.Provider value={contextData}><YourRubrics/></Context.Provider>}/>
+        <Route path="/EditRubric" element={<Context.Provider value={contextData}><EditRubric/></Context.Provider>}/>
       </Routes>
       </BrowserRouter>
     </div>

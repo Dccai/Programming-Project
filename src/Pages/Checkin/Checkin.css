@@ -15,14 +15,37 @@ h1{
     text-align: center;
 }
 @keyframes slideInLeft{
-    from{
-        transform:translateX(-200px);
+    0%{
+        transform:translateX(0) scale(0.8);
+
     }
-    to{
-        transform: translateY(300px);
+    50%{
+        transform: translateY(-8px) scale(1);
+    }
+    70%,100%{
+        transform: translateY(0px) scale(1.1);
     }
 }
 #login{
-    animation:slideInLeft 2s ease-in 0s 2 normal none;
+    border-radius: 4px;
+    width:100px;
+    height:40px;
+    position: relative;
+    box-shadow: 4px 4px 10px 1px black;
+    transition: box-shadow 0.3s linear, transform 0.3s linear;
+}
+#login:hover{
+    box-shadow: 2px 2px 10px 1px black;
+    transform: translate(2px,2px);
 
+}
+#login:active{
+    animation:slideInLeft 0.4s ease-in 0s 1 normal none;
+
+}
+#Checkin{
+    margin-top: -21px;
+    background-image: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);
+    height: 100dvh;
+    width: 100%;
 }

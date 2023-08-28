@@ -1,0 +1,27 @@
+#displayRubric{
+    display: grid;
+    grid-template-columns: 1fr;
+}
+.rubricRow{
+    display: grid;
+    grid-template-columns: repeat(6,250px);
+}
+.rubricGrid{
+    border:2px solid black;
+    margin-right: 0;
+    margin-left: 0;
+    height: 250px;
+    font-size: 30px;
+    overflow-y: scroll; 
+    overflow-x: scroll;
+}
+::-webkit-scrollbar{
+  
+    display: none;
+}
+.rubricDelete{
+    transition: transform 0.3s ease-in-out;
+}
+.rubricDelete:hover{
+transform: scale(1.06);
+}
