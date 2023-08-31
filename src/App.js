@@ -19,7 +19,7 @@ function App() {
   let [user,setUser]=useState(undefined);
   let [docId,setDocId]=useState(undefined);
   let rubricToUse=useRef(undefined);
-  let rubricToEdit=useRef(undefined);
+  let [rubricToEdit,updateRubric]=useState(undefined);
   let rubricToEditKey=useRef(undefined);
   useEffect(
     ()=>{
@@ -39,7 +39,7 @@ function App() {
       return ()=>authListener;
     }
     ,[]);
-    let contextData={userId:user,docId:docId,setDocId:setDocId,rubricToUse:rubricToUse,rubricToEdit:rubricToEdit,rubricToEditKey:rubricToEditKey};
+    let contextData={userId:user,docId:docId,setDocId:setDocId,rubricToUse:rubricToUse,rubricToEdit:rubricToEdit,updateRubric:updateRubric,rubricToEditKey:rubricToEditKey};
   function Navbar(){
     return (
       <nav id="navBar">
