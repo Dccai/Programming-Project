@@ -1,6 +1,6 @@
 import React,{useState,useContext, useEffect} from 'react';
 import { Context } from '../../App';
-import { getDoc, collection,data,doc,getDocs,updateDoc} from 'firebase/firestore';
+import { getDoc, collection,data,doc,getDocs,updateDoc,onSnapshot} from 'firebase/firestore';
 import { Navigate } from 'react-router-dom';
 import { firestore } from '../../Firebase';
 import './YourRubrics.css';
@@ -17,6 +17,8 @@ export function YourRubrics(){
         setRubrics(docData.rubric);
         }
         getRubrics();
+        const unsub = onSnapshot(doc(ref,contextData.docId), (doc) => {
+            getRubrics() });
     },[]);
     async function handleEdit(rubricPassword){
         let documents=await getDocs(collection(firestore,'userData'));
@@ -40,21 +42,21 @@ export function YourRubrics(){
         for (let dataProperties in docData.rubric){
            if(docData.rubric[dataProperties].password===rubricPassword){
                     placeHolder=docData
-                    placeHolder.rubric.pop(placeHolder.rubric.indexOf(placeHolder.rubric[dataProperties]))
+                    placeHolder.rubric.splice(placeHolder.rubric.indexOf(placeHolder.rubric[dataProperties]),1);
              }
                         }
         let passPlaceHolder=passDocData;
-        passPlaceHolder.passwords.pop(passPlaceHolder.passwords.indexOf(rubricPassword));
+        passPlaceHolder.passwords.splice(passPlaceHolder.passwords.indexOf(rubricPassword),1);
         await updateDoc(doc(collection(firestore,'passwords'),'z3riCRgKX2AFUE6Sr3g7'),passPlaceHolder)
         await updateDoc(doc(ref,contextData.docId),placeHolder);
-        doUpdate(a=>a+1)
+        doUpdate(a=>a+1);
     }
     if(editRubric){
         return <Navigate to="/EditRubric" replace={true}/>;
     }
     return (
         <div id='rubricDisplay'>
-            {rubrics!==false?rubrics.map((a,h)=>{
+            {(rubrics!==false&&rubrics.length!==0)?rubrics.map((a,h)=>{
             return (
             <div>
             <div className='rubricShower' key={h} onClick={()=>{handleEdit(a.password)}}>
@@ -65,7 +67,7 @@ export function YourRubrics(){
             <button onClick={()=>{handleDelete(a.password)}}>Delete</button>
             </div>
             );
-            }):<h1>Add Your Rubrics</h1>}
+            }):<h1 id="addRubricLine">Add Your Rubrics</h1>}
         </div>
     )
 }

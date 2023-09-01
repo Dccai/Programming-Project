@@ -26,9 +26,9 @@ export function RubricQuestionaire(){
     }
     if(rubricIt&&score.length<rubricIt.length){
         return(
-            <div>
-                <h1>{contextData.rubricToUse.current['name']}</h1>
-                <h3>{contextData.rubricToUse.current[rubricIt[score.length]]['category']}</h3>
+            <div className="questionaireBackground">
+                <h1 id="rubricQuestionHead">{contextData.rubricToUse.current['name']}</h1>
+                <h3 id="rubricQuestionCategory">{contextData.rubricToUse.current[rubricIt[score.length]]['category']}</h3>
                 <div id="displayOptions"><button className='option' onClick={()=>{handleClick(1)}}>{
                 contextData.rubricToUse.current[rubricIt[score.length]][1]
                 }</button>
@@ -47,14 +47,15 @@ export function RubricQuestionaire(){
     }
     else if(rubricIt&&rubricIt.length===score.length){
         return(
-            <div>
-                {handleScore()}
+            <div className="questionaireBackground">
+                <h1 id="rubricQuestionHead">Your Grade</h1>
+                <h3 id="rubricQuestionCategory" style={{fontSize:'50px'}}>{handleScore()}</h3>
             </div>
         )
     }
     else{
     return (
-        <div>
+        <div className="questionaireBackground">
         <h1>Questionaire</h1>
 
         </div>
