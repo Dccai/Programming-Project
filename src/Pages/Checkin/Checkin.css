@@ -1,8 +1,11 @@
 #signUp{
-    background-color: red;
-    border:10px solid rgb(99, 30, 30);
+    background-color: orange;
+    border-color: orange; 
+    height: 30px;
+    width: 100px;
    transition: transform 0.3s ease-in;
     border-radius: 5px;
+    box-shadow: 4px 4px 10px 1px black;
 }
 #signUp:hover{
     transform: translateY(-5px);
@@ -27,6 +30,8 @@ h1{
     }
 }
 #login{
+    border-color: orange; 
+    background-color: orange;
     border-radius: 4px;
     width:100px;
     height:40px;
@@ -45,7 +50,7 @@ h1{
 }
 #Checkin{
     margin-top: -21px;
-    background-image: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);
+    background-image: linear-gradient(120deg, #7beaec 0%, #52bfe3 100%);
     height: 100dvh;
     width: 100%;
 }

@@ -46,11 +46,14 @@
     height:100dvh;
     background-color:blue;
     margin-top: 0px;
-    background-image: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);
+    background-image: linear-gradient(120deg, #79e6f2 0%, #6daee2 100%);
    line-height: 20px;
 }
+
+
 .sub{
     font-family: Gill Sans, Verdana;
+    color: yellow;
 	font-size: 24px;
 	line-height: 14px;
 	text-transform: uppercase;
@@ -62,7 +65,7 @@
 }
 #title{
  font-family: times, Times New Roman, times-roman, georgia, serif;
-	color: #444;
+	color: rgb(249, 210, 137);
 	margin: 0;
 	padding: 0px 0px 6px 0px;
 	font-size: 51px;
@@ -77,7 +80,7 @@
     
 }
 .homeButtons{
-  background-color: #fbeee0;
+  background-color: #ffd8afed;
   border: 2px solid #422800;
   border-radius: 30px;
   box-shadow: #422800 4px 4px 0 0;
