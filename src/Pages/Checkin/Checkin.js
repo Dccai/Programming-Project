@@ -14,7 +14,7 @@ export function Checkin(){
     }
     return (
         <div id="Checkin">
-            <h1>Sign In!</h1>
+            <h1>Sign Up!</h1>
             <button id="signUp"onClick={()=>goSignUp(true)}>Sign Up</button>
             <h1>Login!</h1>
             <button id="login" onClick={()=>goLogin(true)}>Login</button>

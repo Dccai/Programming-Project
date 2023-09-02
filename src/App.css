@@ -2,27 +2,27 @@
   text-align: center;
 }
 #navBar{
-  height:30px;
+  height:50px;
   background-color: rgb(30, 30, 30);
 }
 
 .link{
   text-decoration: none;
   font-style: italic;
-  font-size: 16px;
-  color: #c43f3f;
+  font-size: 18px;
+  color: #79d2ff;
 
   transition: all 0.3s ease-in-out;
 
 
 }
 .linkBlock{
-  max-width:100px;
+  max-width:120px;
   height: 100%;
   display: inline-block;
-  margin-left: 70px;
-  margin-right: 70px;
+  margin-left: 130px;
+  margin-right: 80px;
 }
 .linkBlock:hover{
-background-color: red;
+background-color: rgb(242, 252, 152);
 }
