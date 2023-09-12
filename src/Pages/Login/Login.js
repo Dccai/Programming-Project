@@ -2,6 +2,7 @@ import React,{useState} from "react";
 import { firestore,auth } from "../../Firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { Navigate } from "react-router-dom";
+import './Login.css';
 export function Login(){
     let [back,goBack]=useState(false);
     let [error,tryAgain]=useState(false);

@@ -9,6 +9,7 @@ export function CreateQuestionaire(){
     let ref=collection(firestore,'userData');
     let rubric=useRef({});
     let [update,setUpdate]=useState(0);
+    let [passTaken,setPassTaken]=useState(false);
     function addRow(e){
         e.preventDefault();
         
@@ -24,7 +25,6 @@ export function CreateQuestionaire(){
         rubric.current=arrayToReplace;
         setUpdate(a=>a+1);
     }
-    //Add A Password System
     async function addRubric(e){
     e.preventDefault();
     let form =new FormData(e.currentTarget);
@@ -32,7 +32,7 @@ export function CreateQuestionaire(){
     let passwordDocs=await getDoc(doc(firestore,'passwords','z3riCRgKX2AFUE6Sr3g7'));
     let passwordList=passwordDocs.data();
     if(passwordList.passwords.includes(data.rubricPassword)){
-        console.log('Password Taken')
+        setPassTaken(true);
     }
     else{
     rubric.current['name']=data.rubricName;
@@ -44,6 +44,7 @@ export function CreateQuestionaire(){
     }
     return (
         <div>
+            {passTaken&&<div className='popUp'><h1 className='popUpPassTaken'>Password Is Taken</h1><button className='coolButton' onClick={()=>setPassTaken(false)}>Close</button></div>}
             <h1>Create Rubric</h1>
             Current Rubric: <br/>
             {Object.keys(rubric.current).map((a,h)=><div keys={h}><div>{rubric.current[a][0]}</div><div>{rubric.current[a][1]}</div><div>{rubric.current[a][2]}</div><div>{rubric.current[a][3]}</div><div>{rubric.current[a][4]}</div><button onClick={()=>deleteRow(a)}>Delete Row</button></div>)}
