@@ -47,7 +47,9 @@ export function CreateQuestionaire(){
             {passTaken&&<div className='popUp'><h1 className='popUpPassTaken'>Password Is Taken</h1><button className='coolButton' onClick={()=>setPassTaken(false)}>Close</button></div>}
             <h1>Create Rubric</h1>
             Current Rubric: <br/>
-            {Object.keys(rubric.current).map((a,h)=><div keys={h}><div>{rubric.current[a][0]}</div><div>{rubric.current[a][1]}</div><div>{rubric.current[a][2]}</div><div>{rubric.current[a][3]}</div><div>{rubric.current[a][4]}</div><button onClick={()=>deleteRow(a)}>Delete Row</button></div>)}
+            <div className="rubricGridDisplay">
+            <div className="rubricGrid">Category</div><div className="rubricGrid">Score of 1</div><div className="rubricGrid">Score of 2</div><div className="rubricGrid">Score of 3</div><div className="rubricGrid">Score of 4</div> </div>
+            {Object.keys(rubric.current).map((a,h)=><div className='rubricGridDisplay row' keys={h}><div className="rubricGrid">{rubric.current[a]['category']}</div><div className="rubricGrid">{rubric.current[a][1]}</div><div className="rubricGrid">{rubric.current[a][2]}</div><div className="rubricGrid">{rubric.current[a][3]}</div><div className="rubricGrid">{rubric.current[a][4]}</div><button className='rubricGrid' onClick={()=>deleteRow(a)}>Delete Row</button></div>)}
             <form onSubmit={addRow}>
             <div>Category</div>    
             <input name="category" type="text" required/>

@@ -75,7 +75,7 @@ export function EditRubric(){
                         if (contextData.rubricToEdit[a]===undefined){
                             return null;
                         }
-                        console.log(contextData.rubricToEdit[a])
+                     
                         
                         return (
                             <div className='rubricRow' key={h}>

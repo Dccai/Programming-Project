@@ -36,3 +36,14 @@
     background-color: rgb(147, 147, 147);
     color: black;
 }
+.rubricGridDisplay{
+    display: grid;
+    grid-template-columns: repeat(5,200px);
+    margin-left: 140px;
+}
+.rubricGrid{
+height: 250px;
+}
+.row{
+    grid-template-columns: repeat(6, 200px);
+}
