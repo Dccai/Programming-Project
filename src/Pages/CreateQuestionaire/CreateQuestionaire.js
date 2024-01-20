@@ -51,17 +51,16 @@ export function CreateQuestionaire(){
             <div className="rubricGrid">Category</div><div className="rubricGrid">Score of 1</div><div className="rubricGrid">Score of 2</div><div className="rubricGrid">Score of 3</div><div className="rubricGrid">Score of 4</div> </div>
             {Object.keys(rubric.current).map((a,h)=><div className='rubricGridDisplay row' keys={h}><div className="rubricGrid">{rubric.current[a]['category']}</div><div className="rubricGrid">{rubric.current[a][1]}</div><div className="rubricGrid">{rubric.current[a][2]}</div><div className="rubricGrid">{rubric.current[a][3]}</div><div className="rubricGrid">{rubric.current[a][4]}</div><button className='rubricGrid' onClick={()=>deleteRow(a)}>Delete Row</button></div>)}
             <form onSubmit={addRow}>
-            <div>Category</div>    
-            <input name="category" type="text" required/>
-            <div>Score Of 1</div> 
-            <input name="score1" type="text" required/>
-            <div>Score Of 2</div> 
-            <input name="score2" type="text" required/>
-            <div>Score Of 3</div> 
-            <input name="score3" type="text" required/>
-            <div>Score Of 4</div> 
-            <input type="text" name="score4"required/>
-            <button>Create A Row</button>
+            <br/>
+            <div className='rubricGridDisplay row'>
+            <textarea name="category" className='rubricGrid'>Category</textarea>    
+            <textarea name ="score1" className='rubricGrid'>Score Of 1</textarea> 
+            <textarea name="score2"className='rubricGrid'>Score Of 2</textarea> 
+            <textarea name="score3" className='rubricGrid'>Score Of 3</textarea> 
+            <textarea name='score4' className='rubricGrid'>Score Of 4</textarea> 
+            <button className='rubricGrid'>Create A Row</button>
+            </div>
+           
             </form>
             <form onSubmit={addRubric}>
                 <label htmlFor='rubricName'>Name Of The Rubric</label>

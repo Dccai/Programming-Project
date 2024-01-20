@@ -1,25 +1,43 @@
 import React,{useState,useContext, useEffect} from 'react';
 import { Context } from '../../App';
 import { getDoc, collection,data,doc,getDocs,updateDoc,onSnapshot} from 'firebase/firestore';
-import { Navigate } from 'react-router-dom';
+import { Navigate,useNavigate } from 'react-router-dom';
 import { firestore } from '../../Firebase';
 import './YourRubrics.css';
 export function YourRubrics(){
+    let nav=useNavigate();
     let contextData=useContext(Context);
+  
     let ref=collection(firestore,'userData');
     let [rubrics,setRubrics]=useState(false);
     let [editRubric,goEditRubric]=useState(false);
     let [update,doUpdate]=useState(0);
     useEffect(()=>{
-        async function getRubrics(){
-        let document=await getDoc(doc(ref,contextData.docId));
-        let docData=document.data();
-        setRubrics(docData.rubric);
+        async function getRubrics(){  
+        if(contextData.userId!==undefined){
+       let document=await getDoc(doc(ref,contextData.docId));
+       let docData=document.data();
+       setRubrics(docData.rubric);
+        }
+        else{
+           nav("/Home");
+        };
         }
         getRubrics();
-        const unsub = onSnapshot(doc(ref,contextData.docId), (doc) => {
-            getRubrics() });
+        try{
+       onSnapshot(doc(ref,contextData.docId), (doc) => {
+          getRubrics() });
+       }
+       catch(e){
+        console.log(e);
+       }
+    
+
+      
+    
+       
     },[]);
+  
     async function handleEdit(rubricPassword){
         let documents=await getDocs(collection(firestore,'userData'));
         documents.docs.forEach(doc=>{

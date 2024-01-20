@@ -2,11 +2,11 @@ import React,{useState,useContext} from "react";
 import { firestore,auth } from "../../Firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import {addDoc,collection,updateDoc,doc} from "@firebase/firestore";
-import { Context } from "../../App";
+import { Context } from '../../App';
 import { Navigate } from "react-router-dom";
 export function Signup(){
-    let contextData=useContext(Context);
     let reference=collection(firestore,"userData");
+    let contextData=useContext(Context);
     let [error,tryAgain]=useState(false);
     let [back,goBack]=useState(false);
     let [questionaire,goToQuestionaire]=useState(false);
@@ -14,8 +14,9 @@ export function Signup(){
         e.preventDefault();
         let form=new FormData(e.currentTarget);
         let data=Object.fromEntries(form);
-    createUserWithEmailAndPassword(auth, data.signUpEmail,data.signUpPassword).then((user)=>{addDoc(reference,{id:user.user.uid,rubric:[]}).then(dc=>{updateDoc(doc(reference,dc.id),{docId:dc.id})});})
+    createUserWithEmailAndPassword(auth, data.signUpEmail,data.signUpPassword).then((user)=>{addDoc(reference,{id:user.user.uid,rubric:[]}).then(dc=>{updateDoc(doc(reference,dc.id),{docId:dc.id}); contextData.setDocId(dc.id);});})
         .then(a=>{goToQuestionaire(true);}).catch(error=>{console.log(error);tryAgain(true);});
+       
     }
     if(back){
         return <Navigate to="/" replace={true}/>;

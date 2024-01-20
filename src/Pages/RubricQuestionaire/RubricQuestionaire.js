@@ -1,16 +1,23 @@
 import './RubricQuestionaire.css'
 import React,{useState,useEffect,useContext, useRef} from 'react';
 import { Context } from '../../App';
+import { useNavigate } from 'react-router-dom';
 export function RubricQuestionaire(){
     let contextData=useContext(Context);
     let [rubricIt,setRubricIt]=useState(false);
     let [score,updateScore]=useState([]);
+    let nav=useNavigate();
     useEffect(()=>{
+        if(contextData.userId!==undefined){
         let rubricKeys=Object.keys(contextData.rubricToUse.current);
         rubricKeys.pop(rubricKeys.indexOf('name'));
         rubricKeys.pop(rubricKeys.indexOf('description'));
         rubricKeys.pop(rubricKeys.indexOf('password'));
         setRubricIt(rubricKeys);
+        }
+        else{
+            nav("/Home");
+        }
     },[]);
     function handleClick(score){
         updateScore(a=>[...a,score])

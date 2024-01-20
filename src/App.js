@@ -21,6 +21,13 @@ function App() {
   let rubricToUse=useRef(undefined);
   let [rubricToEdit,updateRubric]=useState(undefined);
   let rubricToEditKey=useRef(undefined);
+  async function getGoodData(id){
+    let q=query(ref,where('id','==',id));
+    let docs=await getDocs(q);
+    let doc=docs.docs[0]
+    let data=doc.data();
+    setDocId(data.docId);
+  }
   useEffect(
     ()=>{
       let authListener=onAuthStateChanged(auth,(user)=>{
@@ -39,7 +46,7 @@ function App() {
       return ()=>authListener;
     }
     ,[]);
-    let contextData={userId:user,docId:docId,setDocId:setDocId,rubricToUse:rubricToUse,rubricToEdit:rubricToEdit,updateRubric:updateRubric,rubricToEditKey:rubricToEditKey};
+    let contextData={userId:user,docId:docId,setDocId:setDocId,rubricToUse:rubricToUse,rubricToEdit:rubricToEdit,updateRubric:updateRubric,rubricToEditKey:rubricToEditKey,getDocId:getGoodData};
   function Navbar(){
     return (
       <nav id="navBar">
